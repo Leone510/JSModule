@@ -16,6 +16,61 @@
       <div class="control__title">
         <h3>Control interface</h3>
       </div>
+      <h4>Create new event:</h4>
+      <form>
+        <p class="eventTitle">Event title:</p>
+        <input class="taskName" type="text" value="Title" />
+        <div class="setTime">
+          Set start time:
+          <input class="inpHour" min="8" max="16" value="12" type="number" />
+          :
+          <input class="inpMin" min="0" max="59" value="00" type="number" />
+        </div>
+        <div class="setDuration">
+          Set duration time:
+          <input
+            class="inpDuration"
+            min="5"
+            max="360"
+            value="15"
+            type="number"
+          />
+        </div>
+        <div class="colors">
+          <p>Set color:</p>
+          <div class="colorContainer">
+            <label>
+              <input class="blue" name="color" type="radio" checked="true" />
+              Blue
+            </label>
+            <div class="radioColorB"></div>
+          </div>
+          <div class="colorContainer">
+            <label>
+              <input class="red" name="color" type="radio" />
+              Red
+            </label>
+            <div class="radioColorR"></div>
+          </div>
+          <div class="colorContainer">
+            <label>
+              <input class="green" name="color" type="radio" />
+              Green
+            </label>
+            <div class="radioColorG"></div>
+          </div>
+          <div class="colorContainer">
+            <label>
+              <input class="yellow" name="color" type="radio" />
+              Yellow
+            </label>
+            <div class="radioColorY"></div>
+          </div>
+        </div>
+        <div class="submitContainer">
+          <button class="newEventBtn" type="button">Apply</button>
+        </div>
+      </form>
     </aside>
     <main>
       <div class="container">

@@ -21,12 +21,12 @@ header {
           align-items: center;
 }
 
-aside {
+.control {
   width: 30%;
   background: #9c9c9c;
 }
 
-aside .control__title {
+.control .control__title {
   width: 100%;
   height: 50px;
   display: -webkit-box;
@@ -38,6 +38,147 @@ aside .control__title {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border-bottom: 3px solid #474a51;
+}
+
+.control h4 {
+  padding: 5px;
+  border-bottom: 1px solid #474a51;
+}
+
+.control form {
+  width: 100%;
+  height: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 3px solid #474a51;
+}
+
+.control form .eventTitle {
+  padding-left: 5px;
+}
+
+.control form .taskName {
+  margin: 5px;
+  width: 300px;
+  height: 20px;
+}
+
+.control form .setTime {
+  padding: 5px;
+  width: 100%;
+  height: 35px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.control form .setTime .inpHour {
+  margin-left: 10px;
+  width: 40px;
+}
+
+.control form .setTime .inpMin {
+  width: 40px;
+}
+
+.control form .setDuration {
+  padding: 5px;
+}
+
+.control form .setDuration .inpDuration {
+  width: 60px;
+  margin-left: 10px;
+}
+
+.control form .colors {
+  padding: 10px;
+  width: 100%;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-top: 1px solid #474a51;
+}
+
+.control form .colors .colorContainer {
+  width: 100%;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.control form .colors .colorContainer .radioColorR {
+  width: 100px;
+  height: 30px;
+  background: rgba(155, 45, 48, 0.5);
+  border-left: 3px solid #9b2d30;
+}
+
+.control form .colors .colorContainer .radioColorG {
+  width: 100px;
+  height: 30px;
+  background: rgba(68, 148, 74, 0.5);
+  border-left: 3px solid #44944a;
+}
+
+.control form .colors .colorContainer .radioColorB {
+  width: 100px;
+  height: 30px;
+  background: rgba(110, 158, 207, 0.5);
+  border-left: 3px solid #6e9ecf;
+}
+
+.control form .colors .colorContainer .radioColorY {
+  width: 100px;
+  height: 30px;
+  background: rgba(255, 207, 72, 0.5);
+  border-left: 3px solid #ffcf48;
+}
+
+.control form .submitContainer {
+  width: 100%;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.control form .newEventBtn {
+  height: 30px;
+  width: 100px;
+  border: 1px solid #1560bd;
+  border-radius: 5px;
+  background: #5d76cb;
+  color: white;
+  -webkit-box-shadow: inset -1px 3px 8px 5px #1f87ff, 2px 5px 16px 0px #0b325e, 0px 0px 12px 2px rgba(0, 0, 0, 0);
+  box-shadow: inset -1px 3px 8px 5px #1f87ff, 2px 5px 16px 0px #0b325e, 0px 0px 12px 2px rgba(0, 0, 0, 0);
 }
 
 main {
@@ -61,13 +202,19 @@ main .container {
   width: 80%;
   height: 90%;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
 main .container .timeBar {
   padding: 20px;
-  width: 100%;
+  width: 303px;
   height: 100%;
   position: relative;
   background: #ffffff;
@@ -80,10 +227,11 @@ main .container .timeBar .hourTL {
   width: 100%;
   height: 60px;
   color: #a8a8a8;
-  font-weight: 500;
+  font-weight: 200;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-size: 20px;
+  font-family: "Open Sans";
+  font-size: 16px;
   border-top: 2px solid rgba(160, 160, 160, 0.3);
 }
 
@@ -91,10 +239,13 @@ main .container .timeBar .HalfHourTL {
   width: 100%;
   height: 60px;
   color: #a8a8a8;
-  font-weight: 500;
+  font-weight: 200;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-size: 14px;
+  font-family: "Open Sans";
+  font-size: 12px;
+  -webkit-transform: translateX(8px);
+          transform: translateX(8px);
 }
 
 main .container .timeBar .taskBox {
@@ -103,5 +254,60 @@ main .container .timeBar .taskBox {
           box-sizing: border-box;
   position: absolute;
   z-index: 1;
+}
+
+main .container .timeBar .taskBox .taskTitle {
+  margin-top: 5px;
+  height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  font-family: "Open Sans";
+  font-size: 14px;
+}
+
+main .container .timeBar .taskBox .taskClose {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 2px;
+  right: 2px;
+  background: red;
+  color: white;
+  font-size: 10px;
+}
+
+main .container .timeBar .taskBox .taskClose:hover {
+  cursor: pointer;
+}
+
+main .container .timeBar .taskBox .taskEdit {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 2px;
+  right: 15px;
+  background: blue;
+  color: white;
+  font-size: 10px;
 }
 /*# sourceMappingURL=style.css.map */
