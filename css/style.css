@@ -310,4 +310,79 @@ main .container .timeBar .taskBox .taskEdit {
   color: white;
   font-size: 10px;
 }
+
+main .editModal {
+  padding: 5px;
+  height: 150px;
+  width: 300px;
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: rgba(9, 70, 134, 0.7);
+  border: 2px solid #094686;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+main .editModal .changeTitle {
+  width: 200px;
+}
+
+main .editModal .changeHour,
+main .editModal .changeMin {
+  width: 40px;
+}
+
+main .editModal .changeDur {
+  width: 60px;
+}
+
+main .editModal .modalBtns {
+  width: 100%;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .editModal .modalBtns .applyBtn {
+  margin-right: 10px;
+  height: 25px;
+  background: blue;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+main .editModal .modalBtns .deleteBtn {
+  margin-right: 10px;
+  height: 25px;
+  background: red;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+main .active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
 /*# sourceMappingURL=style.css.map */

@@ -43,14 +43,36 @@ const renderTimeLine = function(hours) {
 class Tasks {
    constructor() {
       this.daylyTasks = this.neighborCheck([...tasks]);
+      this._getTasksFromLS();
       this.renderTasks();
+   }
+
+   _getTasksFromLS() {
+      const tasksAsJson = localStorage.getItem('tasks');
+      if (tasksAsJson !== null) {
+         const tasks = JSON.parse(tasksAsJson);
+         this.daylyTasks = tasks;
+      }
+   }
+
+   _setTsksToLS() {
+      const tasksAsJson = JSON.stringify(this.daylyTasks);
+      localStorage.setItem('tasks', tasksAsJson);
    }
 
    settingForNewTask = {
       title: 'New event',
       startingTime: [4, 0],
       duration: 15,
-      color: '110,158,207'
+      color: '110,158,207',
+   }
+
+   timeoutCheck() {
+      return (
+         (this.settingForNewTask.startingTime[0]*60 +
+         this.settingForNewTask.startingTime[1] +
+         this.settingForNewTask.duration) > 540
+      )
    }
 
    neighborCheck(innerArr) {
@@ -69,23 +91,25 @@ class Tasks {
          task.isNeighbor = false;
          rangedTasks.forEach(item => {
             if (item.id !== task.id) {
-               if ((task.range[0] <= item.range[0] && task.range[1] >= item.range[0]) ||
-               (task.range[0] <= item.range[1] && task.range[1] >= item.range[1])) {
+               if ((task.range[0] < item.range[0] && task.range[1] > item.range[0]) ||
+               (task.range[0] < item.range[1] && task.range[1] > item.range[1])) {
                   task.isNeighbor = true;
                   return;
                }
-               if (task.range[0] >= item.range[0] && task.range[1] <= item.range[1]){
+               if (task.range[0] > item.range[0] && task.range[1] < item.range[1]){
                   task.isNeighbor = true;
                   task.surrounded = true;
                   return;
                }  
             }
          })
+
          return task;
       })
 
       let label = true;
       const result = arr.map(item => {
+         item.neighbor = '';
          if (item.isNeighbor) {
             if (label) {
                item.neighbor = 'left';
@@ -117,13 +141,11 @@ class Tasks {
       }
 
       const taskTitle = cElem('div', 'taskTitle', `${task.title}`);
-      const taskClose = cElem('div', 'taskClose', 'X');
-      taskClose.onclick = () => {
-         this.removeTask(task.id);
-      }
-      const taskEdit = cElem('div', 'taskEdit', '!')
       const taskBox = cElem('div', 'taskBox');
-      taskBox.append(taskClose, taskTitle, taskEdit);
+      taskBox.onclick = () => {
+         this.showModal(task);
+      }
+      taskBox.append(taskTitle);
       taskBox.style.height = `${task.duration*2}px`;
       taskBox.style.width = boxWidth;
       taskBox.style.top = `${task.start*2+20}px`;
@@ -155,7 +177,6 @@ class Tasks {
             }
          }
       })
-      console.log(coincidences)
       if (!coincidences[0]) {
          return true;
       }
@@ -179,6 +200,48 @@ class Tasks {
       return true;
    }
 
+   showModal = (task) => {
+      editModal.classList.add('active');
+      const changetTitle = gElem('.changeTitle');
+      changetTitle.value = task.title;
+      const changetHour = gElem('.changeHour');
+      changetHour.value = Math.trunc(task.start/60)+8;
+      const changetMin = gElem('.changeMin');
+      changetMin.value = task.start-((changetHour.value-8)*60);
+      const changetDur = gElem('.changeDur');
+      changetDur.value = task.duration;
+      const applyBtn = gElem('.applyBtn');
+      const checker = this.takeRange(
+         {
+            start: (Number(changetHour.value)-8)*60 + Number(changetMin.value),
+            duration: Number(changetDur.value),
+         })
+      applyBtn.onclick = () => {
+         if (this.placeCheck(checker)) {
+            editModal.classList.remove('active');
+            return;
+         }
+         if (
+            ((Number(changetHour.value)-8)*60 + Number(changetMin.value))+
+               Number(changetDur.value)> 540
+         ) {
+            editModal.classList.remove('active');
+            return;
+         }
+         task.title = changetTitle.value;
+         task.start = (Number(changetHour.value)-8)*60 + Number(changetMin.value);
+         task.duration = Number(changetDur.value);
+         this.daylyTasks = this.neighborCheck(this.daylyTasks);
+         this.renderTasks();
+         editModal.classList.remove('active');
+      }
+      const deleteBtn = gElem('.deleteBtn');
+      deleteBtn.onclick = () => {
+         this.removeTask(task.id);
+         editModal.classList.remove('active');
+      }
+   }
+
    renderTasks() {
       timeBar.innerHTML = '';
       renderTimeLine(9);
@@ -187,11 +250,19 @@ class Tasks {
       this.daylyTasks.forEach(task => {
          timeBar.append(this._createTask(task))
       })
+
+      this._setTsksToLS();
    }
    
 }
 
 calendar = new Tasks();
+
+//--------------------------------------------------------
+//--------------------- Edit modal -----------------------
+//--------------------------------------------------------
+
+const editModal = gElem('.editModal');
 
 //--------------------------------------------------------
 //--------------------- Events ---------------------------
@@ -250,6 +321,9 @@ setTaskColorY.onchange = (e) => {
 
 const newEventBtn = gElem('.newEventBtn');
 newEventBtn.onclick = () => {
+   if (calendar.timeoutCheck()) {
+      return;
+   }
    let newTask = {
       start: Number(calendar.settingForNewTask.startingTime[0])*60 +
          Number(calendar.settingForNewTask.startingTime[1]),

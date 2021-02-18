@@ -30,7 +30,7 @@
           Set duration time:
           <input
             class="inpDuration"
-            min="5"
+            min="15"
             max="360"
             value="15"
             type="number"
@@ -76,6 +76,26 @@
       <div class="container">
         <div class="timeBar">
           <!-- time bar -->
+        </div>
+      </div>
+      <div class="editModal">
+        <label>
+          Change title:
+          <input class="changeTitle" type="text" />
+        </label>
+        <label>
+          Change Time:
+          <input class="changeHour" min="8" max="16" type="number" />
+          :
+          <input class="changeMin" min="0" max="59" type="number" />
+        </label>
+        <label>
+          Change Duration:
+          <input class="changeDur" min="15" max="360" type="number" />
+        </label>
+        <div class="modalBtns">
+          <button class="applyBtn">Apply</button>
+          <button class="deleteBtn">Delete</button>
         </div>
       </div>
     </main>
